@@ -6,7 +6,7 @@
   "mixins": [
   ],
   "client": [
-    "xyz.skullition.testmodfabric.mixin.ExampleMixin"
+    "ExampleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

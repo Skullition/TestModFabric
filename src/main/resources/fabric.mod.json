@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "testmodfabric",
-  "version": "${version}",
+  "version": "0.0.1",
 
   "name": "Test Mod Fabric",
   "description": "This is a description.",
