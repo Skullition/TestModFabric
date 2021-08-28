@@ -1,3 +1,4 @@
 {
-  "item.testmodfabric.realphone": "Real Phone"
+  "item.testmodfabric.realphone": "Real Phone",
+  "itemGroup.testmodfabric.mygroup": "My Item Group"
 }
