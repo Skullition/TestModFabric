@@ -12,4 +12,4 @@ jobs:
           - name: Check for errors.
         uses: github/super-linter@v3
         env:
-          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_ALL_CODEBASE: false

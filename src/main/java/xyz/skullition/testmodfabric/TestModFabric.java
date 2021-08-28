@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import xyz.skullition.testmodfabric.items.RealPhone;
 import xyz.skullition.testmodfabric.registry.Setup;
 
 public class TestModFabric implements ModInitializer {
@@ -16,7 +17,7 @@ public class TestModFabric implements ModInitializer {
     public static final String MODID = "testmodfabric";
 
     public static final ItemGroup MY_ITEM_GROUP = FabricItemGroupBuilder
-            .build(new Identifier(TestModFabric.MODID, "mygroup"), () -> new ItemStack(Blocks.COBBLESTONE));
+            .build(new Identifier(TestModFabric.MODID, "mygroup"), () -> new ItemStack(Setup.REAL_PHONE));
 
     @Override
     public void onInitialize() {

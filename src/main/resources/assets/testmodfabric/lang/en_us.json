@@ -1,4 +1,5 @@
 {
   "item.testmodfabric.realphone": "Real Phone",
-  "itemGroup.testmodfabric.mygroup": "My Item Group"
+  "itemGroup.testmodfabric.mygroup": "My Item Group",
+  "realphone.message": "Hello!"
 }
