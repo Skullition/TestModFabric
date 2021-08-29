@@ -1,5 +1,6 @@
 {
   "item.testmodfabric.realphone": "Real Phone",
   "itemGroup.testmodfabric.mygroup": "My Item Group",
-  "realphone.message": "Hello!"
+  "realphone.message": "Hello!",
+  "block.testmodfabric.unsafeblock": "Unsafe Block"
 }
