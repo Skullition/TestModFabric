@@ -5,6 +5,8 @@ import com.google.common.collect.Maps;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -59,7 +61,7 @@ public class RealPhone extends Item {
 
         if (blockState3 != null) {
             if (!world.isClient) {
-                world.setBlockState(blockPos, blockState3);
+                world.setBlockState(blockPos, Blocks.DIAMOND_BLOCK.getDefaultState());
                 if (player != null) {
                     context.getStack().damage(1, player, (p) -> {
                         p.sendToolBreakStatus(context.getHand());
@@ -71,5 +73,11 @@ public class RealPhone extends Item {
         } else {
             return ActionResult.SUCCESS;
         }
+    }
+
+    @Override
+    public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
+        target.damage(DamageSource.ANVIL, 1000F);
+        return true;
     }
 }
