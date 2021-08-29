@@ -59,7 +59,6 @@ public class RealPhone extends Item {
             blockState3 = blockState2;
         }
 
-        if (blockState3 != null) {
             if (!world.isClient) {
                 world.setBlockState(blockPos, Blocks.DIAMOND_BLOCK.getDefaultState());
                 if (player != null) {
@@ -67,9 +66,8 @@ public class RealPhone extends Item {
                         p.sendToolBreakStatus(context.getHand());
                     });
                 }
-            }
 
-            return ActionResult.success(world.isClient);
+            return ActionResult.success(false);
         } else {
             return ActionResult.SUCCESS;
         }
