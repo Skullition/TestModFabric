@@ -2,13 +2,20 @@ package xyz.skullition.testmodfabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
-import net.minecraft.block.Blocks;
+import net.fabricmc.fabric.api.event.player.UseItemCallback;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PickaxeItem;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.event.GameEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import xyz.skullition.testmodfabric.items.RealPhone;
 import xyz.skullition.testmodfabric.registry.Setup;
 
 public class TestModFabric implements ModInitializer {
@@ -26,9 +33,20 @@ public class TestModFabric implements ModInitializer {
         // Proceed with mild caution.
         Setup.registerItems();
 
-
         System.out.println("Hello Fabric world!");
 
+        // consumable tools callback
+        UseItemCallback.EVENT.register((player, world, hand) ->
+        {
+            if (!player.isSpectator() && !player.isCreative() && player.getMainHandStack().getItem() instanceof PickaxeItem && player.getHungerManager().getFoodLevel() < 6) {
+                world.emitGameEvent(player, GameEvent.EAT, player.getBlockPos());
+                world.playSound(player, player.getBlockPos(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
+                player.getMainHandStack().damage(100, player, (p) -> p.sendToolBreakStatus(hand));
+                player.getHungerManager().add(4, 2);
+                player.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 120));
+            }
+            return TypedActionResult.pass(ItemStack.EMPTY);
+        });
 
     }
 }
