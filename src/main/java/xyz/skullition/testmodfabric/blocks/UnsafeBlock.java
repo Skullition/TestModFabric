@@ -1,7 +1,9 @@
 package xyz.skullition.testmodfabric.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -11,15 +13,16 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
+import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
 
-public class UnsafeBlock extends Block {
+public class UnsafeBlock extends Block implements BlockEntityProvider {
     public static final BooleanProperty LIGHTNING_THING = BooleanProperty.of("lightningthing");
 
     public UnsafeBlock(Settings settings) {
@@ -36,12 +39,12 @@ public class UnsafeBlock extends Block {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         // check if block is active
         if (world.getBlockState(pos).get(LIGHTNING_THING).equals(true) && !world.isClient()) {
-            world.setBlockState(pos,state.with(LIGHTNING_THING, false));
+            world.setBlockState(pos, state.with(LIGHTNING_THING, false));
         } else {
             world.playSound(player, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.HOSTILE, 1F, 1F);
             world.setBlockState(pos, state.with(LIGHTNING_THING, true));
         }
-        return ActionResult.SUCCESS;
+        return ActionResult.PASS;
     }
 
     @Override
@@ -60,5 +63,11 @@ public class UnsafeBlock extends Block {
             world.setBlockState(pos, state.with(LIGHTNING_THING, false));
         }
         super.onSteppedOn(world, pos, state, entity);
+    }
+
+    @Nullable
+    @Override
+    public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new UnsafeBlockEntity(pos, state);
     }
 }
