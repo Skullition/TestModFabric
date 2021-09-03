@@ -4,6 +4,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import xyz.skullition.testmodfabric.registry.Setup;
 
 public class UnsafeBlockEntity extends BlockEntity {
@@ -11,6 +12,9 @@ public class UnsafeBlockEntity extends BlockEntity {
 
     public UnsafeBlockEntity(BlockPos pos, BlockState state) {
         super(Setup.UNSAFE_BLOCK_ENTITY, pos, state);
+    }
+
+    public static void tick(World world1, BlockPos pos, BlockState state1, UnsafeBlockEntity be) {
     }
 
     @Override

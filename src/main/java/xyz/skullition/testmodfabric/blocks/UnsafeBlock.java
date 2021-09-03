@@ -1,9 +1,9 @@
 package xyz.skullition.testmodfabric.blocks;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.BlockEntityTicker;
+import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -21,8 +21,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
+import xyz.skullition.testmodfabric.registry.Setup;
 
-public class UnsafeBlock extends Block implements BlockEntityProvider {
+public class UnsafeBlock extends BlockWithEntity {
     public static final BooleanProperty LIGHTNING_THING = BooleanProperty.of("lightningthing");
 
     public UnsafeBlock(Settings settings) {
@@ -69,5 +70,16 @@ public class UnsafeBlock extends Block implements BlockEntityProvider {
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
         return new UnsafeBlockEntity(pos, state);
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
+        return checkType(type, Setup.UNSAFE_BLOCK_ENTITY, (world1, pos, state1, be) -> UnsafeBlockEntity.tick(world1, pos, state1, be))
     }
 }
