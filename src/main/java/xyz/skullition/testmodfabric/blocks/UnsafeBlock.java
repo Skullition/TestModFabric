@@ -80,6 +80,6 @@ public class UnsafeBlock extends BlockWithEntity {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
-        return checkType(type, Setup.UNSAFE_BLOCK_ENTITY, (world1, pos, state1, be) -> UnsafeBlockEntity.tick(world1, pos, state1, be))
+        return checkType(type, Setup.UNSAFE_BLOCK_ENTITY, (world1, pos, state1, be) -> UnsafeBlockEntity.tick(world1, pos, state1, be));
     }
 }
