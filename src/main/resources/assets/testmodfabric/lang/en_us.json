@@ -3,5 +3,7 @@
   "item.testmodfabric.extendedpickaxe": "Extended Pickaxe",
   "itemGroup.testmodfabric.mygroup": "My Item Group",
   "realphone.message": "Hello!",
-  "block.testmodfabric.unsafeblock": "Unsafe Block"
+  "block.testmodfabric.unsafeblock": "Unsafe Block",
+  "message.extendedpickaxe.tooltip": "Current extra distance is %s blocks.",
+  "message.extendedpickaxe.text" : "Pickaxe extra distance is now %s!"
 }
