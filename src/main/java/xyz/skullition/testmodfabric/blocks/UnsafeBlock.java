@@ -9,10 +9,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
+import net.minecraft.text.LiteralText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -38,12 +40,33 @@ public class UnsafeBlock extends BlockWithEntity {
 
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+        if (world.isClient) return ActionResult.SUCCESS;
+        Inventory blockEntity = (Inventory) world.getBlockEntity(pos);
+        // for lightning to spawn
         // check if block is active
         if (world.getBlockState(pos).get(LIGHTNING_THING).equals(true) && !world.isClient()) {
             world.setBlockState(pos, state.with(LIGHTNING_THING, false));
         } else {
             world.playSound(player, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.HOSTILE, 1F, 1F);
             world.setBlockState(pos, state.with(LIGHTNING_THING, true));
+        }
+
+        if (!player.getStackInHand(hand).isEmpty()) {
+            if (blockEntity.getStack(0).isEmpty()) {
+                blockEntity.setStack(0, player.getStackInHand(hand).copy());
+                player.getStackInHand(hand).setCount(0);
+            } else if (blockEntity.getStack(1).isEmpty()) {
+                blockEntity.setStack(1, player.getStackInHand(hand).copy());
+                player.getStackInHand(hand).setCount(0);
+            } else {
+                if (!blockEntity.getStack(0).isEmpty()) {
+                    player.getInventory().offerOrDrop(blockEntity.getStack(0));
+                    blockEntity.removeStack(0);
+                } else if (!blockEntity.getStack(1).isEmpty()) {
+                    player.getInventory().offerOrDrop(blockEntity.getStack(1));
+                    blockEntity.removeStack(1);
+                }
+            }
         }
         return ActionResult.PASS;
     }
