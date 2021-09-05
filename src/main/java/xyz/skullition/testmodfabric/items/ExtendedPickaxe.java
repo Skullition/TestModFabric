@@ -75,7 +75,7 @@ public class ExtendedPickaxe extends PickaxeItem {
                         nbt.putBoolean("mining", true);
                         for (int i = 0; i < distance; i++) {
                             BlockPos relativeDist = pos.offset(hit.getSide().getOpposite(), i + 1);
-                            if (!tryHarvest(stack, miner, relativeDist)) {
+                            if (!tryHarvest(miner, relativeDist)) {
                                 nbt.putBoolean("mining", false);
                                 return result;
                             }
@@ -88,7 +88,7 @@ public class ExtendedPickaxe extends PickaxeItem {
         return result;
     }
 
-    private boolean tryHarvest(ItemStack stack, LivingEntity entityLiving, BlockPos pos) {
+    private boolean tryHarvest(LivingEntity entityLiving, BlockPos pos) {
         BlockState state = entityLiving.world.getBlockState(pos);
         if (isSuitableFor(state)) {
             if (entityLiving instanceof ServerPlayerEntity player) {
