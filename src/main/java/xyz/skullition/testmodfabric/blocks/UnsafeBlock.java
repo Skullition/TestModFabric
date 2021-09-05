@@ -14,7 +14,6 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.text.LiteralText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -26,16 +25,16 @@ import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
 import xyz.skullition.testmodfabric.registry.Setup;
 
 public class UnsafeBlock extends BlockWithEntity {
-    public static final BooleanProperty LIGHTNING_THING = BooleanProperty.of("lightningthing");
+    public static final BooleanProperty CHARGED = BooleanProperty.of("charged");
 
     public UnsafeBlock(Settings settings) {
         super(settings);
-        setDefaultState(getStateManager().getDefaultState().with(LIGHTNING_THING, false));
+        setDefaultState(getStateManager().getDefaultState().with(CHARGED, false));
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(LIGHTNING_THING);
+        builder.add(CHARGED);
     }
 
     @Override
@@ -44,11 +43,11 @@ public class UnsafeBlock extends BlockWithEntity {
         Inventory blockEntity = (Inventory) world.getBlockEntity(pos);
         // for lightning to spawn
         // check if block is active
-        if (world.getBlockState(pos).get(LIGHTNING_THING).equals(true) && !world.isClient()) {
-            world.setBlockState(pos, state.with(LIGHTNING_THING, false));
+        if (world.getBlockState(pos).get(CHARGED).equals(true) && !world.isClient()) {
+            world.setBlockState(pos, state.with(CHARGED, false));
         } else {
             world.playSound(player, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.HOSTILE, 1F, 1F);
-            world.setBlockState(pos, state.with(LIGHTNING_THING, true));
+            world.setBlockState(pos, state.with(CHARGED, true));
         }
 
         if (!player.getStackInHand(hand).isEmpty()) {
@@ -74,7 +73,7 @@ public class UnsafeBlock extends BlockWithEntity {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (entity.isPlayer() && world.getBlockState(pos).get(LIGHTNING_THING)) {
+        if (entity.isPlayer() && world.getBlockState(pos).get(CHARGED)) {
             PigEntity pigEntity = EntityType.PIG.create(world);
             LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
             if (lightningEntity != null) {
@@ -85,7 +84,7 @@ public class UnsafeBlock extends BlockWithEntity {
             }
             world.spawnEntity(pigEntity);
             world.spawnEntity(lightningEntity);
-            world.setBlockState(pos, state.with(LIGHTNING_THING, false));
+            world.setBlockState(pos, state.with(CHARGED, false));
         }
         super.onSteppedOn(world, pos, state, entity);
     }
