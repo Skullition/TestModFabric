@@ -67,6 +67,7 @@ public class UnsafeBlock extends BlockWithEntity {
                     blockEntity.removeStack(1);
                 }
             }
+            return ActionResult.SUCCESS;
         }
         return ActionResult.PASS;
     }

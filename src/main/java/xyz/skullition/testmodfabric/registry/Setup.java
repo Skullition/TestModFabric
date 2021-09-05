@@ -13,12 +13,14 @@ import xyz.skullition.testmodfabric.TestModFabric;
 import xyz.skullition.testmodfabric.blocks.UnsafeBlock;
 import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
 import xyz.skullition.testmodfabric.items.ExtendedPickaxe;
+import xyz.skullition.testmodfabric.items.LightningStaff;
 import xyz.skullition.testmodfabric.items.RealPhone;
 
 public class Setup {
 
     public static final RealPhone REAL_PHONE = new RealPhone(new FabricItemSettings().maxCount(16).group(TestModFabric.MY_ITEM_GROUP).fireproof());
     public static final ExtendedPickaxe EXTENDED_PICKAXE = new ExtendedPickaxe(new FabricItemSettings().maxCount(1).group(TestModFabric.MY_ITEM_GROUP));
+    public static final LightningStaff LIGHTNING_STAFF = new LightningStaff(new FabricItemSettings().maxCount(1).group(TestModFabric.MY_ITEM_GROUP));
     public static final UnsafeBlock UNSAFE_BLOCK = new UnsafeBlock(FabricBlockSettings.of(Material.GLASS).breakByHand(true).drops(new Identifier(TestModFabric.MODID, "unsafeblock")));
     public static BlockEntityType<UnsafeBlockEntity> UNSAFE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(UnsafeBlockEntity::new, UNSAFE_BLOCK).build();
 
@@ -26,6 +28,7 @@ public class Setup {
         // items
         Registry.register(Registry.ITEM, new Identifier(TestModFabric.MODID, "realphone"), REAL_PHONE);
         Registry.register(Registry.ITEM, new Identifier(TestModFabric.MODID, "extendedpickaxe"), EXTENDED_PICKAXE);
+        Registry.register(Registry.ITEM, new Identifier(TestModFabric.MODID, "lightningstaff"), LIGHTNING_STAFF);
         // blocks
         Registry.register(Registry.BLOCK, new Identifier(TestModFabric.MODID, "unsafeblock"), UNSAFE_BLOCK);
         // block items
