@@ -3,8 +3,9 @@ package xyz.skullition.testmodfabric.items;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolItem;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -13,9 +14,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 
-public class LightningStaff extends Item {
+public class LightningStaff extends ToolItem {
     public LightningStaff(Settings settings) {
-        super(settings);
+        super(ToolMaterials.WOOD, settings);
     }
 
     @Override
@@ -33,8 +34,8 @@ public class LightningStaff extends Item {
         if (lightningEntity != null) {
             lightningEntity.refreshPositionAfterTeleport(Vec3d.ofBottomCenter(blockLocation));
         }
-        // TODO: Implement durability reducing per use
-        // user.getStackInHand(hand).damage(10, user, (p) -> p.sendToolBreakStatus(hand));
+        // TODO: Lightning distance scaling with view distance
+         user.getStackInHand(hand).damage(10, user, (p) -> p.sendToolBreakStatus(hand));
         world.spawnEntity(lightningEntity);
 
         return TypedActionResult.success(user.getStackInHand(hand), true);

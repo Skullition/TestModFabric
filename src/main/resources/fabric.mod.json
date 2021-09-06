@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "xyz.skullition.testmodfabric.TestModFabric"
+    ],
+    "client": [
+      "xyz.skullition.testmodfabric.TestModFabricClient"
     ]
   },
   "mixins": [
