@@ -73,7 +73,7 @@ public class UnsafeBlock extends BlockWithEntity {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if (entity.isPlayer() && world.getBlockState(pos).get(CHARGED)) {
+        if ( world.getBlockState(pos).get(CHARGED)) {
             PigEntity pigEntity = EntityType.PIG.create(world);
             LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
             if (lightningEntity != null) {

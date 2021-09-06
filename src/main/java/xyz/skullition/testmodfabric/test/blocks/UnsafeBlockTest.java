@@ -1,4 +1,4 @@
-package blocks;
+package xyz.skullition.testmodfabric.test.blocks;
 
 import net.fabricmc.fabric.api.gametest.v1.FabricGameTest;
 import net.minecraft.entity.EntityType;
@@ -14,9 +14,11 @@ public class UnsafeBlockTest implements FabricGameTest {
         BlockPos blockPos = new BlockPos(2, 1, 2);
 
         test.setBlockState(blockPos, Setup.UNSAFE_BLOCK);
+        test.expectBlock(Setup.UNSAFE_BLOCK, blockPos);
         test.useBlock(blockPos);
-        test.spawnMob(EntityType.VILLAGER, 2, 2, 2);
-        test.expectEntity(EntityType.LIGHTNING_BOLT);
+        test.spawnMob(EntityType.VILLAGER, 2, 5, 2);
+        // 
+        test.method_36038(EntityType.ZOMBIFIED_PIGLIN, new BlockPos(2, 2, 2));
         test.killAllEntities();
     }
 }
