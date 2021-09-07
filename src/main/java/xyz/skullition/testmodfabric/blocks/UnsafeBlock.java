@@ -43,7 +43,7 @@ public class UnsafeBlock extends BlockWithEntity {
         Inventory blockEntity = (Inventory) world.getBlockEntity(pos);
         // for lightning to spawn
         // check if block is active
-        if (world.getBlockState(pos).get(CHARGED).equals(true) && !world.isClient()) {
+        if (state.get(CHARGED).equals(true) && !world.isClient()) {
             world.setBlockState(pos, state.with(CHARGED, false));
         } else {
             world.playSound(player, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.HOSTILE, 1F, 1F);
@@ -73,7 +73,7 @@ public class UnsafeBlock extends BlockWithEntity {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if ( world.getBlockState(pos).get(CHARGED)) {
+        if ( state.get(CHARGED)) {
             PigEntity pigEntity = EntityType.PIG.create(world);
             LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
             if (lightningEntity != null) {
