@@ -1,6 +1,11 @@
 {
   "variants": {
-    "": { "model": "testmodfabric:block/unsafeblock" }
+    "charged=false": {
+      "model": "testmodfabric:block/unsafeblock"
+    },
+    "charged=true": {
+      "model": "testmodfabric:block/unsafeblock_charged"
+    }
   }
 }
 

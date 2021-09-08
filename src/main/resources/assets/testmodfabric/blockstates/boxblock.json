@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "testmodfabric:block/boxblock"
+    }
+  }
+}

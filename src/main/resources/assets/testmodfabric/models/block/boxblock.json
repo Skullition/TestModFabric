@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "testmodfabric:block/boxblock",
+    "north": "testmodfabric:block/boxblock",
+    "south": "testmodfabric:block/boxblock",
+    "east": "testmodfabric:block/boxblock",
+    "west": "testmodfabric:block/boxblock",
+    "up": "testmodfabric:block/boxblock_top",
+    "down": "testmodfabric:block/boxblock"
+  }
+}
