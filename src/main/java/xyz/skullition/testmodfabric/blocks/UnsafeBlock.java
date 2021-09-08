@@ -7,9 +7,12 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
+import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ArrowItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -20,6 +23,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
 import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
 import xyz.skullition.testmodfabric.registry.Setup;
@@ -104,5 +108,14 @@ public class UnsafeBlock extends BlockWithEntity {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(World world, BlockState state, BlockEntityType<T> type) {
         return checkType(type, Setup.UNSAFE_BLOCK_ENTITY, (world1, pos, state1, be) -> UnsafeBlockEntity.tick(world1, pos, state1, be));
+    }
+
+    @Override
+    public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
+        if (world.isClient()) { return; }
+        BlockPos pos = hit.getBlockPos();
+        if (projectile.canModifyAt(world, pos)) {
+            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 10, true ,Explosion.DestructionType.BREAK);
+        }
     }
 }
