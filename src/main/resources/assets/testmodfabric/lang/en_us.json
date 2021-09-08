@@ -5,7 +5,8 @@
   "itemGroup.testmodfabric.mygroup": "My Item Group",
   "realphone.message": "Hello!",
   "block.testmodfabric.unsafeblock": "Unsafe Block",
+  "block.testmodfabric.purpleglassblock": "Purple Glass Block",
+  "block.testmodfabric.boxblock": "Crate",
   "message.extendedpickaxe.tooltip": "Current extra distance is %s blocks.",
-  "message.extendedpickaxe.text" : "Pickaxe extra distance is now %s!",
-  "block.testmodfabric.purpleglassblock": "Purple Glass Block"
+  "message.extendedpickaxe.text" : "Pickaxe extra distance is now %s!"
 }
