@@ -1,0 +1,6 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "testmodfabric:item/rapidfirebow_pulling_1"
+  }
+}

@@ -4,6 +4,7 @@ package xyz.skullition.testmodfabric.registry;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
+import net.fabricmc.fabric.impl.object.builder.FabricEntityType;
 import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
@@ -13,15 +14,16 @@ import xyz.skullition.testmodfabric.TestModFabric;
 import xyz.skullition.testmodfabric.blocks.PurpleGlassBlock;
 import xyz.skullition.testmodfabric.blocks.UnsafeBlock;
 import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
-import xyz.skullition.testmodfabric.items.ExtendedPickaxe;
-import xyz.skullition.testmodfabric.items.LightningStaff;
-import xyz.skullition.testmodfabric.items.RealPhone;
+import xyz.skullition.testmodfabric.entities.ExplosiveArrowEntity;
+import xyz.skullition.testmodfabric.items.*;
 
 public class Setup {
 
     public static final RealPhone REAL_PHONE = new RealPhone(new FabricItemSettings().maxCount(16).group(TestModFabric.MY_ITEM_GROUP).fireproof());
     public static final ExtendedPickaxe EXTENDED_PICKAXE = new ExtendedPickaxe(new FabricItemSettings().maxCount(1).group(TestModFabric.MY_ITEM_GROUP));
     public static final LightningStaff LIGHTNING_STAFF = new LightningStaff(new FabricItemSettings().maxCount(1).group(TestModFabric.MY_ITEM_GROUP));
+    public static final RapidfireBow RAPIDFIRE_BOW = new RapidfireBow(new FabricItemSettings().maxCount(1).group(TestModFabric.MY_ITEM_GROUP));
+    public static final ExplosiveArrow EXPLOSIVE_ARROW = new ExplosiveArrow(new FabricItemSettings().maxCount(64).group(TestModFabric.MY_ITEM_GROUP));
     public static final UnsafeBlock UNSAFE_BLOCK = new UnsafeBlock(FabricBlockSettings.of(Material.GLASS).breakByHand(true).drops(new Identifier(TestModFabric.MODID, "unsafeblock")));
     public static final PurpleGlassBlock PURPLE_GLASS_BLOCK = new PurpleGlassBlock(FabricBlockSettings.of(Material.GLASS).nonOpaque().breakByHand(true).drops(new Identifier(TestModFabric.MODID, "purpleglassblock")));
     public static BlockEntityType<UnsafeBlockEntity> UNSAFE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(UnsafeBlockEntity::new, UNSAFE_BLOCK).build();
@@ -31,6 +33,7 @@ public class Setup {
         Registry.register(Registry.ITEM, new Identifier(TestModFabric.MODID, "realphone"), REAL_PHONE);
         Registry.register(Registry.ITEM, new Identifier(TestModFabric.MODID, "extendedpickaxe"), EXTENDED_PICKAXE);
         Registry.register(Registry.ITEM, new Identifier(TestModFabric.MODID, "lightningstaff"), LIGHTNING_STAFF);
+        Registry.register(Registry.ITEM, new Identifier(TestModFabric.MODID, "rapidfirebow"), RAPIDFIRE_BOW);
         // blocks
         Registry.register(Registry.BLOCK, new Identifier(TestModFabric.MODID, "unsafeblock"), UNSAFE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(TestModFabric.MODID, "purpleglassblock"), PURPLE_GLASS_BLOCK);
