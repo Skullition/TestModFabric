@@ -1,18 +1,19 @@
 package xyz.skullition.testmodfabric.blocks;
 
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityTicker;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
-import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ArrowItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -77,7 +78,7 @@ public class UnsafeBlock extends BlockWithEntity {
 
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
-        if ( state.get(CHARGED)) {
+        if (state.get(CHARGED)) {
             PigEntity pigEntity = EntityType.PIG.create(world);
             LightningEntity lightningEntity = EntityType.LIGHTNING_BOLT.create(world);
             if (lightningEntity != null) {
@@ -112,10 +113,12 @@ public class UnsafeBlock extends BlockWithEntity {
 
     @Override
     public void onProjectileHit(World world, BlockState state, BlockHitResult hit, ProjectileEntity projectile) {
-        if (world.isClient()) { return; }
+        if (world.isClient()) {
+            return;
+        }
         BlockPos pos = hit.getBlockPos();
         if (projectile.canModifyAt(world, pos)) {
-            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 10, true ,Explosion.DestructionType.BREAK);
+            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 10, true, Explosion.DestructionType.BREAK);
         }
     }
 }
