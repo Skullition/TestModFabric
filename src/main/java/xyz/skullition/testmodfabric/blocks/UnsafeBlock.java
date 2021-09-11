@@ -27,7 +27,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
-import xyz.skullition.testmodfabric.blocks.blockentities.BoxBlockEntity;
 import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
 import xyz.skullition.testmodfabric.registry.Setup;
 
@@ -130,7 +129,7 @@ public class UnsafeBlock extends BlockWithEntity {
     public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (state.getBlock() != newState.getBlock()) {
-            ItemScatterer.spawn(world, pos, (UnsafeBlockEntity)blockEntity);
+            ItemScatterer.spawn(world, pos, (UnsafeBlockEntity) blockEntity);
             world.updateComparators(pos, this);
         }
         super.onStateReplaced(state, world, pos, newState, moved);

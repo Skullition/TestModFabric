@@ -8,7 +8,6 @@ import net.minecraft.test.TestContext;
 import net.minecraft.util.math.BlockPos;
 import xyz.skullition.testmodfabric.registry.Setup;
 
-// currently will fail
 public class UnsafeBlockTest implements FabricGameTest {
     @GameTest(structureName = EMPTY_STRUCTURE)
     public void checkLightning(TestContext test) {
