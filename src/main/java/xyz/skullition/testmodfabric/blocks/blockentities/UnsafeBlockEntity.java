@@ -19,6 +19,7 @@ public class UnsafeBlockEntity extends BlockEntity implements ImplementedInvento
     }
 
     public static void tick(World world1, BlockPos pos, BlockState state1, UnsafeBlockEntity be) {
+        world1.updateNeighbors(pos, state1.getBlock());
     }
 
     @Override

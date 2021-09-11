@@ -20,12 +20,14 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import org.jetbrains.annotations.Nullable;
+import xyz.skullition.testmodfabric.blocks.blockentities.BoxBlockEntity;
 import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
 import xyz.skullition.testmodfabric.registry.Setup;
 
@@ -48,11 +50,13 @@ public class UnsafeBlock extends BlockWithEntity {
         Inventory blockEntity = (Inventory) world.getBlockEntity(pos);
         // for lightning to spawn
         // check if block is active
-        if (state.get(CHARGED).equals(true) && !world.isClient()) {
-            world.setBlockState(pos, state.with(CHARGED, false));
-        } else {
-            world.playSound(player, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.HOSTILE, 1F, 1F);
-            world.setBlockState(pos, state.with(CHARGED, true));
+        if (player.getStackInHand(hand).isEmpty()) {
+            if (state.get(CHARGED).equals(true) && !world.isClient()) {
+                world.setBlockState(pos, state.with(CHARGED, false));
+            } else {
+                world.playSound(player, pos, SoundEvents.BLOCK_AMETHYST_BLOCK_HIT, SoundCategory.HOSTILE, 1F, 1F);
+                world.setBlockState(pos, state.with(CHARGED, true));
+            }
         }
 
         if (!player.getStackInHand(hand).isEmpty()) {
@@ -62,7 +66,7 @@ public class UnsafeBlock extends BlockWithEntity {
             } else if (blockEntity.getStack(1).isEmpty()) {
                 blockEntity.setStack(1, player.getStackInHand(hand).copy());
                 player.getStackInHand(hand).setCount(0);
-            } else {
+            } else { // player's hand is empty
                 if (!blockEntity.getStack(0).isEmpty()) {
                     player.getInventory().offerOrDrop(blockEntity.getStack(0));
                     blockEntity.removeStack(0);
@@ -117,8 +121,18 @@ public class UnsafeBlock extends BlockWithEntity {
             return;
         }
         BlockPos pos = hit.getBlockPos();
-        if (projectile.canModifyAt(world, pos)) {
+        if (projectile.canModifyAt(world, pos) && state.get(CHARGED)) {
             world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 10, true, Explosion.DestructionType.BREAK);
         }
+    }
+
+    @Override
+    public void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        if (state.getBlock() != newState.getBlock()) {
+            ItemScatterer.spawn(world, pos, (UnsafeBlockEntity)blockEntity);
+            world.updateComparators(pos, this);
+        }
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 }
