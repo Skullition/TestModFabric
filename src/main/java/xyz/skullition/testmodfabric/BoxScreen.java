@@ -6,13 +6,27 @@ import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import xyz.skullition.testmodfabric.blocks.blockentities.BoxScreenHandler;
+
+import java.util.Optional;
 
 public class BoxScreen extends HandledScreen<ScreenHandler> {
     private static final Identifier TEXTURE_ID = new Identifier("minecraft", "textures/gui/container/dispenser.png");
     public BoxScreen(ScreenHandler handler, PlayerInventory inventory, Text title) {
-        super(handler, inventory, title);
+        super(handler, inventory, getPositionText(handler).orElse(title));
+    }
+
+    private static Optional<Text> getPositionText(ScreenHandler handler) {
+        if (handler instanceof BoxScreenHandler) {
+            BlockPos pos = ((BoxScreenHandler) handler).getPos();
+            return pos != null ? Optional.of(new LiteralText("(" + pos.toShortString() + ")")) : Optional.empty();
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override

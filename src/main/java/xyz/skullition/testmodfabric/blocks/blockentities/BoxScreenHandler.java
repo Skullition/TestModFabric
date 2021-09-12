@@ -5,16 +5,20 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.math.BlockPos;
 import xyz.skullition.testmodfabric.registry.Setup;
 
 public class BoxScreenHandler extends ScreenHandler {
+    private BlockPos pos;
     private final Inventory inventory;
     public BoxScreenHandler(int syncId, PlayerInventory inv, Inventory inventory) {
         super(Setup.BOX_SCREEN_HANDLER, syncId);
         checkSize(inventory, 9);
         this.inventory = inventory;
+        pos = BlockPos.ORIGIN;
 
         inventory.onOpen(inv.player);
         int m;
@@ -37,8 +41,9 @@ public class BoxScreenHandler extends ScreenHandler {
         }
     }
 
-    public  BoxScreenHandler(int syncId, PlayerInventory inv) {
+    public  BoxScreenHandler(int syncId, PlayerInventory inv, PacketByteBuf buf) {
         this(syncId, inv, new SimpleInventory(9));
+        this.pos = buf.readBlockPos();
     }
 
     @Override
@@ -69,5 +74,9 @@ public class BoxScreenHandler extends ScreenHandler {
         }
 
         return newStack;
+    }
+
+    public BlockPos getPos() {
+        return pos;
     }
 }

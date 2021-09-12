@@ -30,7 +30,7 @@ public class Setup {
     public static final UnsafeBlock UNSAFE_BLOCK = new UnsafeBlock(FabricBlockSettings.of(Material.GLASS).breakByHand(true).drops(new Identifier(TestModFabric.MODID, "unsafeblock")));
     public static final BoxBlock BOX_BLOCK = new BoxBlock(FabricBlockSettings.of(Material.WOOD).breakByHand(true).drops(new Identifier(TestModFabric.MODID, "boxblock")));
     public static final PurpleGlassBlock PURPLE_GLASS_BLOCK = new PurpleGlassBlock(FabricBlockSettings.of(Material.GLASS).nonOpaque().breakByHand(true).drops(new Identifier(TestModFabric.MODID, "purpleglassblock")));
-    public static final ScreenHandlerType<BoxScreenHandler> BOX_SCREEN_HANDLER = ScreenHandlerRegistry.registerSimple(new Identifier(TestModFabric.MODID, "boxblock"), BoxScreenHandler::new);
+    public static final ScreenHandlerType<BoxScreenHandler> BOX_SCREEN_HANDLER = ScreenHandlerRegistry.registerExtended(new Identifier(TestModFabric.MODID, "boxblock"), BoxScreenHandler::new);
     public static BlockEntityType<UnsafeBlockEntity> UNSAFE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(UnsafeBlockEntity::new, UNSAFE_BLOCK).build();
     public static BlockEntityType<BoxBlockEntity> BOX_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(BoxBlockEntity::new, BOX_BLOCK).build();
 
