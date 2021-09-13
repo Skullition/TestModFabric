@@ -20,11 +20,16 @@ public class MixinTest implements FabricGameTest {
         // spawn sheep
         SheepEntity sheep = this.spawnSheep(tc, absolutePos);
         sheep.sheared(SoundCategory.PLAYERS);
-        tc.addInstantFinalTask(() -> tc.expectItemsAt(Items.BONE, absolutePos, 1, 1));
+        tc.addInstantFinalTask(() -> tc.expectItemsAt(Items.BONE, pos, 1, 1));
     }
 
     private SheepEntity spawnSheep(TestContext tc, BlockPos absolutePos) {
+        // place blocks
         tc.setBlockState(1, 1, 1, Blocks.DIRT);
+        tc.setBlockState(0, 1, 1, Blocks.DIRT);
+        tc.setBlockState(0, 1, 2, Blocks.DIRT);
+
+
         SheepEntity sheep = EntityType.SHEEP.create(tc.getWorld());
         if (sheep != null) {
             sheep.refreshPositionAfterTeleport(Vec3d.ofCenter(absolutePos));
