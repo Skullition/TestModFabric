@@ -26,7 +26,8 @@
     ],
     "fabric-gametest" : [
       "xyz.skullition.testmodfabric.test.blocks.UnsafeBlockTest",
-      "xyz.skullition.testmodfabric.test.blocks.BoxBlockTest"
+      "xyz.skullition.testmodfabric.test.blocks.BoxBlockTest",
+      "xyz.skullition.testmodfabric.test.mixin.MixinTest"
     ]
   },
   "mixins": [

@@ -7,7 +7,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
+import net.minecraft.item.ToolItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -35,7 +35,7 @@ public class TestModFabric implements ModInitializer {
         // consumable tools callback
         UseItemCallback.EVENT.register((player, world, hand) ->
         {
-            if (!player.isSpectator() && !player.isCreative() && player.getMainHandStack().getItem() instanceof PickaxeItem && player.getHungerManager().getFoodLevel() < 6) {
+            if (!player.isSpectator() && !player.isCreative() && player.getMainHandStack().getItem() instanceof ToolItem && player.getHungerManager().getFoodLevel() < 6) {
                 world.emitGameEvent(player, GameEvent.EAT, player.getBlockPos());
                 world.playSound(player, player.getBlockPos(), SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.NEUTRAL, 1.0F, 1.0F + (world.random.nextFloat() - world.random.nextFloat()) * 0.4F);
                 player.getMainHandStack().damage(100, player, (p) -> p.sendToolBreakStatus(hand));
