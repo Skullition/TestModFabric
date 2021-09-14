@@ -2,10 +2,12 @@ package xyz.skullition.testmodfabric.items;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterials;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -13,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import xyz.skullition.testmodfabric.TestModFabric;
 
 public class LightningStaff extends ToolItem {
     public LightningStaff(Settings settings) {
@@ -39,5 +42,11 @@ public class LightningStaff extends ToolItem {
         world.spawnEntity(lightningEntity);
 
         return TypedActionResult.success(user.getStackInHand(hand), true);
+    }
+
+    @Override
+    public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
+        TestModFabric.LOGGER.info("HELLO!");
+        return ActionResult.PASS;
     }
 }
