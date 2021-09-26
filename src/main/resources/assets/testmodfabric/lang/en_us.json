@@ -8,5 +8,6 @@
   "block.testmodfabric.purpleglassblock": "Purple Glass Block",
   "block.testmodfabric.boxblock": "Crate",
   "message.extendedpickaxe.tooltip": "Current extra distance is %s blocks.",
-  "message.extendedpickaxe.text" : "Pickaxe extra distance is now %s!"
+  "message.extendedpickaxe.text" : "Pickaxe extra distance is now %s!",
+  "block.testmodfabric.mugblock" : "Mug"
 }
