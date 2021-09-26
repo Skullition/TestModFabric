@@ -10,6 +10,7 @@ import xyz.skullition.testmodfabric.entity.NoodleEntity;
 public class NoodleEntityRenderer extends MobEntityRenderer<NoodleEntity, NoodleEntityModel> {
     public NoodleEntityRenderer(EntityRendererFactory.Context context) {
         super(context, new NoodleEntityModel(context.getPart(TestModFabricClient.MODEL_NOODLE_LAYER)), 0.5f);
+        this.shadowRadius = 0.1f;
     }
 
     @Override
