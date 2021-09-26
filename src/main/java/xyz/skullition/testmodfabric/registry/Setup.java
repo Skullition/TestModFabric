@@ -23,6 +23,7 @@ import xyz.skullition.testmodfabric.blocks.UnsafeBlock;
 import xyz.skullition.testmodfabric.blocks.blockentities.BoxBlockEntity;
 import xyz.skullition.testmodfabric.blocks.blockentities.BoxScreenHandler;
 import xyz.skullition.testmodfabric.blocks.blockentities.UnsafeBlockEntity;
+import xyz.skullition.testmodfabric.entity.NoodleEntity;
 import xyz.skullition.testmodfabric.entity.ThingEntity;
 import xyz.skullition.testmodfabric.items.ExtendedPickaxe;
 import xyz.skullition.testmodfabric.items.LightningStaff;
@@ -38,6 +39,7 @@ public class Setup {
     public static final PurpleGlassBlock PURPLE_GLASS_BLOCK = new PurpleGlassBlock(FabricBlockSettings.of(Material.GLASS).nonOpaque().breakByHand(true).drops(new Identifier(TestModFabric.MODID, "purpleglassblock")));
     public static final ScreenHandlerType<BoxScreenHandler> BOX_SCREEN_HANDLER = ScreenHandlerRegistry.registerExtended(new Identifier(TestModFabric.MODID, "boxblock"), BoxScreenHandler::new);
     public static final EntityType<ThingEntity> THING_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, ThingEntity::new).dimensions(EntityDimensions.fixed(0.75f, 0.75f)).build();
+    public static final EntityType<NoodleEntity> NOODLE_ENTITY = FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, NoodleEntity::new).dimensions(EntityDimensions.fixed(0.75f, 0.75f)).build();
     public static final BlockEntityType<UnsafeBlockEntity> UNSAFE_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(UnsafeBlockEntity::new, UNSAFE_BLOCK).build();
     public static final BlockEntityType<BoxBlockEntity> BOX_BLOCK_ENTITY = FabricBlockEntityTypeBuilder.create(BoxBlockEntity::new, BOX_BLOCK).build();
 
@@ -59,7 +61,9 @@ public class Setup {
         Registry.register(Registry.BLOCK_ENTITY_TYPE, new Identifier(TestModFabric.MODID, "boxblockentity"), BOX_BLOCK_ENTITY);
         // entities
         Registry.register(Registry.ENTITY_TYPE, new Identifier(TestModFabric.MODID, "thing_entity"), THING_ENTITY);
+        Registry.register(Registry.ENTITY_TYPE, new Identifier(TestModFabric.MODID, "noodle_entity"), NOODLE_ENTITY);
         // entity attribute
         FabricDefaultAttributeRegistry.register(THING_ENTITY, ThingEntity.createMobAttributes());
+        FabricDefaultAttributeRegistry.register(NOODLE_ENTITY, NoodleEntity.createMobAttributes());
     }
 }

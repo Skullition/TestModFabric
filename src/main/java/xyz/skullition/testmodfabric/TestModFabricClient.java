@@ -9,11 +9,14 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.util.Identifier;
 import xyz.skullition.testmodfabric.registry.Setup;
+import xyz.skullition.testmodfabric.renderer.NoodleEntityModel;
+import xyz.skullition.testmodfabric.renderer.NoodleEntityRenderer;
 import xyz.skullition.testmodfabric.renderer.ThingEntityModel;
 import xyz.skullition.testmodfabric.renderer.ThingEntityRenderer;
 
 public class TestModFabricClient implements ClientModInitializer {
     public static final EntityModelLayer MODEL_THING_LAYER = new EntityModelLayer(new Identifier(TestModFabric.MODID, "thing_entity"), "main");
+    public static final EntityModelLayer MODEL_NOODLE_LAYER = new EntityModelLayer(new Identifier(TestModFabric.MODID, "noodle_entity"), "main");
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlock(Setup.PURPLE_GLASS_BLOCK, RenderLayer.getCutout());
@@ -22,5 +25,8 @@ public class TestModFabricClient implements ClientModInitializer {
         // thing entity
         EntityRendererRegistry.register(Setup.THING_ENTITY, ctx -> new ThingEntityRenderer(ctx));
         EntityModelLayerRegistry.registerModelLayer(MODEL_THING_LAYER, ThingEntityModel::getTexturedModelData);
+        // noodle entity
+        EntityRendererRegistry.register(Setup.NOODLE_ENTITY, (ctx) -> new NoodleEntityRenderer(ctx));
+        EntityModelLayerRegistry.registerModelLayer(MODEL_NOODLE_LAYER, NoodleEntityModel::getTexturedModelData);
     }
 }

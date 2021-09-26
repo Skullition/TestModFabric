@@ -6,9 +6,9 @@ import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
+import xyz.skullition.testmodfabric.entity.NoodleEntity;
 
-public class NoodleEntityModel extends EntityModel<Entity> {
+public class NoodleEntityModel extends EntityModel<NoodleEntity> {
     private final ModelPart bb_main;
 
     public NoodleEntityModel(ModelPart root) {
@@ -23,7 +23,7 @@ public class NoodleEntityModel extends EntityModel<Entity> {
     }
 
     @Override
-    public void setAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setAngles(NoodleEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         //previously the render function, render code was moved to a method below
     }
 
