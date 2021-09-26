@@ -23,10 +23,10 @@ public class TestModFabricClient implements ClientModInitializer {
 
         ScreenRegistry.register(Setup.BOX_SCREEN_HANDLER, BoxScreen::new);
         // thing entity
-        EntityRendererRegistry.register(Setup.THING_ENTITY, ctx -> new ThingEntityRenderer(ctx));
+        EntityRendererRegistry.register(Setup.THING_ENTITY, ThingEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_THING_LAYER, ThingEntityModel::getTexturedModelData);
         // noodle entity
-        EntityRendererRegistry.register(Setup.NOODLE_ENTITY, (ctx) -> new NoodleEntityRenderer(ctx));
+        EntityRendererRegistry.register(Setup.NOODLE_ENTITY, NoodleEntityRenderer::new);
         EntityModelLayerRegistry.registerModelLayer(MODEL_NOODLE_LAYER, NoodleEntityModel::getTexturedModelData);
     }
 }
