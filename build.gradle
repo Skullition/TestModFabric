@@ -17,6 +17,10 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	maven { url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+	maven {
+		url = "https://jitpack.io"
+		name = "Jitpack"
+	}
 }
 
 dependencies {
@@ -30,6 +34,7 @@ dependencies {
 
 	// GeckoLib
 	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.17:3.0.13:dev'
+
 }
 
 processResources {
