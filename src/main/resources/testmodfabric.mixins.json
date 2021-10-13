@@ -4,11 +4,11 @@
   "package": "xyz.skullition.testmodfabric.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-  ],
-  "client": [
     "SheepEntityMixin",
     "InjectSnowballEntity",
     "EntityMixin"
+  ],
+  "client": [
   ],
   "injectors": {
     "defaultRequire": 1
